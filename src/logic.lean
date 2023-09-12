@@ -11,19 +11,27 @@ variables P Q R : Prop
 theorem doubleneg_intro :
   P → ¬¬P  :=
 begin
-  sorry,
+  intro p,
+  intro hp,
+  contradiction,
 end
 
 theorem doubleneg_elim :
   ¬¬P → P  :=
 begin
-  sorry,
+  intro hp,
+  by_cases p:P,
+  exact p,
+  exfalso,
+  contradiction,
 end
 
 theorem doubleneg_law :
   ¬¬P ↔ P  :=
 begin
-  sorry,
+  split,
+  exact doubleneg_elim P,
+  exact doubleneg_intro P,
 end
 
 ------------------------------------------------
