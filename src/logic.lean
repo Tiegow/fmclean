@@ -41,13 +41,22 @@ end
 theorem disj_comm :
   (P ∨ Q) → (Q ∨ P)  :=
 begin
-  sorry,
+  intro Hpq,
+  cases Hpq with P Q,
+  right,
+  exact P,
+  left,
+  exact Q,
 end
 
 theorem conj_comm :
   (P ∧ Q) → (Q ∧ P)  :=
 begin
-  sorry,
+  intro Hpq,
+  cases Hpq with P Q,
+  split,
+  exact Q,
+  exact P,
 end
 
 
@@ -58,13 +67,23 @@ end
 theorem impl_as_disj_converse :
   (¬P ∨ Q) → (P → Q)  :=
 begin
-  sorry,
+  intro Hpq,
+  intro Hp,
+  cases Hpq with P Q,
+  exfalso,
+  contradiction,
+  exact Q,
 end
 
 theorem disj_as_impl :
   (P ∨ Q) → (¬P → Q)  :=
 begin
-  sorry,
+  intro Hpq,
+  intro Hp,
+  cases Hpq with P Q,
+  exfalso,
+  contradiction,
+  exact Q,
 end
 
 
@@ -75,7 +94,11 @@ end
 theorem impl_as_contrapositive :
   (P → Q) → (¬Q → ¬P)  :=
 begin
-  sorry,
+  intro Hpq,
+  intro Hq,
+  intro P,
+  have Q : Q := Hpq P,
+  contradiction,
 end
 
 theorem impl_as_contrapositive_converse :
