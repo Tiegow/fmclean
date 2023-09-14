@@ -104,13 +104,33 @@ end
 theorem impl_as_contrapositive_converse :
   (¬Q → ¬P) → (P → Q)  :=
 begin
-  sorry,
+  intro Hqp,
+  intro P,
+  by_cases Q : Q,
+  exact Q,
+  exfalso,
+  apply Hqp Q,
+  exact P,
 end
 
 theorem contrapositive_law :
   (P → Q) ↔ (¬Q → ¬P)  :=
 begin
-  sorry,
+  split,
+  intro Hpq,
+  intro Hq,
+  intro P,
+  have Q : Q := Hpq P,
+  contradiction,
+  -- Ou simpesmente (exact impl_as_contrapositive P Q,)
+  intro Hqp,
+  intro P,
+  by_cases Q : Q,
+  exact Q,
+  exfalso,
+  apply Hqp Q,
+  exact P,
+  -- Ou simpesmente (exact impl_as_contrapositive_converse P Q,)
 end
 
 
@@ -121,7 +141,13 @@ end
 theorem lem_irrefutable :
   ¬¬(P∨¬P)  :=
 begin
-  sorry,
+  intro h,
+  apply h,
+  right,
+  intro p,
+  apply h,
+  left,
+  exact p,
 end
 
 
@@ -132,7 +158,13 @@ end
 theorem peirce_law_weak :
   ((P → Q) → P) → ¬¬P  :=
 begin
-  sorry,
+  intro h,
+  intro np,
+  apply np,
+  apply h,
+  intro p,
+  exfalso,
+  contradiction,
 end
 
 
@@ -143,13 +175,23 @@ end
 theorem disj_as_negconj :
   P∨Q → ¬(¬P∧¬Q)  :=
 begin
-  sorry,
+  intro Hpq,
+  intro Npq,
+  cases Npq with np nq,
+  cases Hpq with p q,
+  contradiction,
+  contradiction,
 end
 
 theorem conj_as_negdisj :
   P∧Q → ¬(¬P∨¬Q)  :=
 begin
-  sorry,
+  intro Hpq,
+  cases Hpq with p q,
+  intro Npq,
+  cases Npq,
+  contradiction,
+  contradiction,
 end
 
 
