@@ -344,19 +344,23 @@
     },
     {
       "lean": "theorem mul_pos (a b : mynat) : a ≠ 0 → b ≠ 0 → a * b ≠ 0 :=\n",
-      "editorText": "sorry"
+      "isSolved": true,
+      "editorText": "intros Ha Hb,\r\ncases a with a',\r\nexfalso,\r\napply Ha,\r\nrefl,\r\ncases b with b',\r\nrw mul_zero,\r\nexact Hb,\r\nrw succ_mul,\r\nrw add_comm,\r\nrw succ_add,\r\nexact succ_ne_zero _,\r\n"
     },
     {
       "lean": "theorem eq_zero_or_eq_zero_of_mul_eq_zero (a b : mynat) (h : a * b = 0) :\n  a = 0 ∨ b = 0 :=\n",
-      "editorText": "sorry"
+      "isSolved": true,
+      "editorText": "induction a with a ha,\r\nleft,\r\nrefl,\r\ninduction b with b hb,\r\nright,\r\nrefl,\r\nrw succ_mul at h,\r\nrw mul_succ at h,\r\nrw add_succ at h,\r\nexfalso,\r\ncontradiction,\r\n"
     },
     {
       "lean": "theorem mul_eq_zero_iff (a b : mynat): a * b = 0 ↔ a = 0 ∨ b = 0 :=\n",
-      "editorText": "sorry"
+      "isSolved": true,
+      "editorText": "split,\r\nintro H1,\r\napply eq_zero_or_eq_zero_of_mul_eq_zero,\r\nexact H1,\r\nintro H2,\r\ncases H2 with Ha Hb,\r\nrw Ha,\r\nrw zero_mul, refl,\r\nrw Hb,\r\nrw mul_zero, refl,\r\n"
     },
     {
       "lean": "theorem mul_left_cancel (a b c : mynat) (ha : a ≠ 0) : a * b = a * c → b = c :=\n",
-      "editorText": "sorry"
+      "isSolved": true,
+      "editorText": "induction c with c Hc generalizing b,\r\nintro H1,\r\nrw mul_zero at H1,\r\nhave H2 := eq_zero_or_eq_zero_of_mul_eq_zero a b H1,\r\ncases H2 with Ha Hb,\r\ncontradiction,\r\nexact Hb,\r\ninduction b with b Hb,\r\nintro H3,\r\nrw mul_zero at H3,\r\nrw succ_eq_add_one at H3,\r\nrw succ_eq_add_one,\r\nsymmetry at H3,\r\nhave H4 := eq_zero_or_eq_zero_of_mul_eq_zero a (c + 1) H3,\r\ncases H4 with Ha' Hc',\r\ncontradiction,\r\nsymmetry,\r\nexact Hc',\r\nintro H5,\r\nrepeat{rw mul_succ at H5},\r\nhave H6 := add_right_cancel (a * b) a (a * c) H5,\r\nhave H7 := Hc b H6,\r\napply succ_eq_succ_of_eq,\r\nexact H7,\r\n"
     },
     {
       "lean": "lemma one_add_le_self (x : mynat) : x ≤ 1 + x :=\n",
