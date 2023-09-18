@@ -202,37 +202,71 @@ end
 theorem demorgan_disj :
   ¬(P∨Q) → (¬P ∧ ¬Q)  :=
 begin
-  sorry,
+  intro Hpq,
+  split,
+  intro P,
+  apply Hpq,
+  left,
+  exact P,
+  intro Q,
+  apply Hpq,
+  right,
+  exact Q,
 end
 
 theorem demorgan_disj_converse :
   (¬P ∧ ¬Q) → ¬(P∨Q)  :=
 begin
-  sorry,
+  intro H1,
+  intro H2,
+  cases H1 with nP nQ,
+  cases H2,
+  contradiction,
+  contradiction,
 end
 
 theorem demorgan_conj :
   ¬(P∧Q) → (¬Q ∨ ¬P)  :=
 begin
-  sorry,
+  intro Hpq,
+  by_cases p:P,
+  by_cases q:Q,
+  right,
+  exfalso,
+  apply Hpq,
+  split,
+  exact p,
+  exact q,
+  left,
+  exact q,
+  right, exact p,
 end
 
 theorem demorgan_conj_converse :
   (¬Q ∨ ¬P) → ¬(P∧Q)  :=
 begin
-  sorry,
+  intro H1,
+  intro H2,
+  cases H2 with p q,
+  cases H1,
+  contradiction,
+  contradiction,
 end
 
 theorem demorgan_conj_law :
   ¬(P∧Q) ↔ (¬Q ∨ ¬P)  :=
 begin
-  sorry,
+  split,
+  exact demorgan_conj P Q,
+  exact demorgan_conj_converse P Q,
 end
 
 theorem demorgan_disj_law :
   ¬(P∨Q) ↔ (¬P ∧ ¬Q)  :=
 begin
-  sorry,
+  split,
+  exact demorgan_disj P Q,
+  exact demorgan_disj_converse P Q,
 end
 
 ------------------------------------------------
@@ -242,25 +276,64 @@ end
 theorem distr_conj_disj :
   P∧(Q∨R) → (P∧Q)∨(P∧R)  :=
 begin
-  sorry,
+  intro H1,
+  cases H1 with p Hqr,
+  cases Hqr,
+  left,
+  split,
+  exact p,
+  exact Hqr,
+  right,
+  split,
+  exact p,
+  exact Hqr,
 end
 
 theorem distr_conj_disj_converse :
   (P∧Q)∨(P∧R) → P∧(Q∨R)  :=
 begin
-  sorry,
+  intro H1,
+  cases H1,
+  cases H1 with p q,
+  split,
+  exact p,
+  left,
+  exact q,
+  cases H1 with p r,
+  split,
+  exact p,
+  right, exact r,
 end
 
 theorem distr_disj_conj :
   P∨(Q∧R) → (P∨Q)∧(P∨R)  :=
 begin
-  sorry,
+  intro H1,
+  split,
+  cases H1,
+  left, exact H1,
+  cases H1 with q r,
+  right, exact q,
+  cases H1,
+  left, exact H1,
+  cases H1 with q r,
+  right, exact r,
 end
 
 theorem distr_disj_conj_converse :
   (P∨Q)∧(P∨R) → P∨(Q∧R)  :=
 begin
-  sorry,
+  intro H1,
+  cases H1 with Hpq Hpr,
+  cases Hpq,
+  left,
+  exact Hpq,
+  cases Hpr,
+  left,
+  exact Hpr,
+  right,
+  split,
+  exact Hpq, exact Hpr,
 end
 
 
